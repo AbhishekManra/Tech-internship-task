@@ -52,18 +52,18 @@ let driver = await new Builder().forBrowser(Browser.CHROME).build()
     await driver.get('https://x.com/i/flow/login')
     // await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN)
     await driver.sleep(5000)
-    await driver.findElement(By.name('text')).sendKeys('abhishektechnorex@gmail.com',Key.RETURN)
+    await driver.findElement(By.name('text')).sendKeys(process.env.TWITTER_EMAIL,Key.RETURN)
     // const heading = await driver.findElement(By.tagName('h1')).getText()
     // console.log(heading === 'Sign in to X')
     await driver.sleep(5000)
     //check if we need to add username/phonenumber
     const heading = await driver.findElement(By.tagName('h1')).getText()
     if(heading === 'Enter your phone number or username'){
-        await driver.findElement(By.name('text')).sendKeys('TechnoRex370080',Key.RETURN)
+        await driver.findElement(By.name('text')).sendKeys(process.env.TWITTER_USERNAME,Key.RETURN)
     }
     await driver.sleep(5000)
 
-    await driver.findElement(By.name('password')).sendKeys('Abhishek#03',Key.RETURN)
+    await driver.findElement(By.name('password')).sendKeys(process.env.TWITTER_PWD,Key.RETURN)
 
     await driver.sleep(10000) // wait for 10 seconds
 
