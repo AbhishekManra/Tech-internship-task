@@ -10,6 +10,7 @@ document.getElementsByTagName('button')[0].addEventListener('click', async (even
         res = res.arr;
 
         content_container.innerText = "";
+        document.getElementsByClassName('clear-btn')[0].style.display = 'block';
 
         for (let i = 0; i < res.length; i++) {
             let new_div = document.createElement('div');
@@ -31,4 +32,16 @@ document.getElementsByTagName('button')[0].addEventListener('click', async (even
 
 
 //clear trendings
-content_container.removeChild
+document.getElementsByClassName('clear-btn')[0].addEventListener('click',()=>{
+
+    removeChilds();   
+})
+
+function removeChilds() {
+    let div_childrens = document.getElementsByClassName('content')[0].children
+    for(let i = 0;i<div_childrens.length;i++){
+        document.getElementsByClassName('content')[0].removeChild(div_childrens[i]);
+    }
+    content_container.innerText = 'Data will appear here'
+    document.getElementsByClassName('clear-btn')[0].style.display = 'none';
+}

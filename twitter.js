@@ -39,6 +39,8 @@ let driver = await new Builder().forBrowser(Browser.CHROME).build()
     res.status(400).send(error.message)
   } finally {
     await driver.quit()
-    res.status(200).json({arr : arr})
+    req.user = arr;
+    // res.status(200).json({arr : arr})
+    next();
   }
 }
