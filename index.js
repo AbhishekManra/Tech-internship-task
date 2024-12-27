@@ -6,14 +6,16 @@ const cors = require('cors')
 const bodyparser = require('body-parser')
 require('dotenv').config();
 const {example} = require('./twitter')
+const path = require('path')
 const portfinder = require('portfinder')
 const {connectdb} = require('./db')
 app.use(cors({
-    origin : ['http://127.0.0.1:5500','http://localhost:3000']
+    origin : ['http://127.0.0.1:5500','http://localhost:3000','http://localhost:5173']
 }));
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended:true}))
 connectdb();
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/whatshappening',example,async(req,res)=>{
     try {
         
@@ -30,6 +32,14 @@ app.get('/whatshappening',example,async(req,res)=>{
     }
         
 });
+
+app.use('*', function (request, response) {
+    response.sendFile(path.join(__dirname, 'public','index.html'));
+});
+
+portfinder.setBasePort(3000);    
+portfinder.setHighestPort(65535); 
+
 portfinder.getPortPromise()
     .then((port) => {
         app.listen(port,()=>{
